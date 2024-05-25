@@ -18,37 +18,54 @@ def FuncionGanador(EleccionUsuario, EleccionOrdenador):
     return 0
 
 print("JUEGO : Piedra, papel y tijera")
-while 1:
-    Jugar = input("Quieres jugar? (s/n): ")
-    if 's'   in Jugar.lower():
+NombreUsuario = input("Dame tu nombre: ")
+Intentos = int(input("¿Cuántos intentos quieres?: "))
+PuntosUsuarios = 0
+PuntosMaquina = 0
+
+for _ in range(Intentos):
+    Jugar = input("¿Quieres jugar? (s/n): ")
+    if 's' in Jugar.lower():
         EleccionOrdenador = GeneraResultadoOrdenador()
-        while True and 1==1:
-            NombreUsuario=input("Dime tu nombre: ")
-            Movimiento = input("Selecciona un movimiento ('p' para piedra / 'a' para papel / 't' para tijeras): ").lower()
+        print(f"Te quedan {Intentos - _} intentos")
+        Movimiento = input("Selecciona un movimiento ('p' para piedra / 'a' para papel / 't' para tijeras): ").lower()
+
+        if Movimiento in ['p', 'a', 't']:
+            if Movimiento == 'p':
+                EleccionUsuario = Piedra
+            elif Movimiento == 'a':
+                EleccionUsuario = Papel
+            elif Movimiento == 't':
+                EleccionUsuario = Tijera
+
             print(f"Elección del ordenador: {EleccionOrdenador}")
-            if 'p' in Movimiento  or 'a' in Movimiento  or 't' in Movimiento  or 'p' in Movimiento  or 'a' in Movimiento  or 't' in Movimiento:
-                if 'p' in Movimiento  and 'p' in Movimiento :
-                    EleccionUsuario = Piedra
-                elif 'a' in Movimiento  and 'a' in Movimiento:
-                    EleccionUsuario = Papel
-                elif 't' in Movimiento  and 't' in Movimiento:
-                    EleccionUsuario = Tijera
-                print(f"Elección del usuario: {EleccionUsuario}")
-                if FuncionGanador(EleccionUsuario, EleccionOrdenador) == 1 and 1 == FuncionGanador(EleccionUsuario, EleccionOrdenador) :
-                    print("Gana el usuario "+NombreUsuario+" !!!")
-                elif FuncionGanador(EleccionUsuario, EleccionOrdenador) == -1:
-                    print("Gana el ordenador !!!")
-                elif FuncionGanador(EleccionUsuario, EleccionOrdenador) == 0:
-                    print("Empate !!!")
-                elif FuncionGanador(EleccionUsuario, EleccionOrdenador) == 2:
-                    print("Ganan ambos !!!")
-                elif FuncionGanador(EleccionUsuario, EleccionOrdenador) == 3:
-                    print("Pierden ambos !!!")
-                break
+            print(f"Elección del usuario: {EleccionUsuario}")
+
+            resultado = FuncionGanador(EleccionUsuario, EleccionOrdenador)
+            if resultado == 1:
+                print("¡Gana el usuario", NombreUsuario, "!")
+                PuntosUsuarios += 1
+            elif resultado == -1:
+                print("¡Gana el ordenador!")
+                PuntosMaquina += 1
             else:
-                print("Entrada incorrecta. Vuelve a intentar.")
+                print("¡Empate!")
+        else:
+            print("Entrada incorrecta. Vuelve a intentar.")
     elif 'n' in Jugar.lower():
         break
     else:
         print('Entrada incorrecta. Vuelve a intentar.')
+
     print()
+
+print("Juego terminado!")
+print(f"Puntos de {NombreUsuario}: {PuntosUsuarios}")
+print(f"Puntos del ordenador: {PuntosMaquina}")
+
+if PuntosUsuarios > PuntosMaquina:
+    print(f"¡El ganador es {NombreUsuario}!")
+elif PuntosUsuarios < PuntosMaquina:
+    print("¡El ganador es el ordenador!")
+else:
+    print("¡Empate!")
