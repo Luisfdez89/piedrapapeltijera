@@ -9,9 +9,22 @@ GanaJugador = [[Papel, Piedra], [Tijera, Papel], [Piedra, Tijera], [Lagarto, Pap
 GanaMaquina = [[Piedra, Papel], [Papel, Tijera], [Tijera, Piedra], [Papel, Lagarto], [Lagarto, Piedra], [Lagarto, Tijera]]
 
 def GeneraResultadoOrdenador():
+    """Genera un movimiento aleatorio de la maquina"""
     return random.choice(opciones)
 
 def FuncionGanador(EleccionUsuario, EleccionOrdenador):
+    """
+    .. include:: ../README.md
+
+    Determina el resultado del juego basado en las elecciones del usuario y la máquina.
+
+        Args:
+            EleccionUsuario (str): Elección del usuario.
+            EleccionOrdenador (str): Elección de la máquina.
+
+        Returns:
+            int: 1 si el jugador gana, -1 si la máquina gana, 0 si hay empate.
+        """
     if [EleccionUsuario, EleccionOrdenador] in GanaJugador:
         return 1
     elif [EleccionUsuario, EleccionOrdenador] in GanaMaquina:
