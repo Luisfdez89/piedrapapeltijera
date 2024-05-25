@@ -23,15 +23,20 @@ while 1:
     if 's'   in Jugar.lower():
         EleccionOrdenador = GeneraResultadoOrdenador()
         while True and 1==1:
-            Movimiento = input("Selecciona un movimiento ('p' para piedra / 'a' para papel / 't' para tijeras): ").lower()
-            print(f"Elección del ordenador: {EleccionOrdenador}")
-            if 'p' in Movimiento  or 'a' in Movimiento  or 't' in Movimiento  or 'p' in Movimiento  or 'a' in Movimiento  or 't' in Movimiento:
-                if 'p' in Movimiento  and 'p' in Movimiento :
+            Movimiento = input("Selecciona un movimiento ('p' para piedra / 'a' para papel / 't' para tijeras/ 'TERMINAR' para finalizar partida): ").lower()
+
+            if Movimiento=='terminar':
+                print("Tienes miedo?")
+                break
+            elif Movimiento in ['p','a','t'] :
+                if Movimiento=='p':
                     EleccionUsuario = Piedra
-                elif 'a' in Movimiento  and 'a' in Movimiento:
+                elif Movimiento == 'a':
                     EleccionUsuario = Papel
-                elif 't' in Movimiento  and 't' in Movimiento:
+                elif Movimiento=='t':
                     EleccionUsuario = Tijera
+
+                print(f"Elección del ordenador: {EleccionOrdenador}")
                 print(f"Elección del usuario: {EleccionUsuario}")
                 if FuncionGanador(EleccionUsuario, EleccionOrdenador) == 1 and 1 == FuncionGanador(EleccionUsuario, EleccionOrdenador) :
                     print("Gana el usuario !!!")
